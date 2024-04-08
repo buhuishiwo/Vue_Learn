@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双向绑定与表单提交</title>
+<!-- 引入Vue.js -->
+<script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>表单示例</h1>
+  <form @submit.prevent="handleSubmit">
+    <label for="name">姓名：</label>
+    <input type="text" id="name" v-model="name">
+
+    <label for="email">邮箱：</label>
+    <input type="email" id="email" v-model="email">
+
+    <button type="submit">提交</button>
+  </form>
+  <p>欢迎, {{ name }}! 你的邮箱是{{ email }}.</p>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    name: '',
+    email: ''
+  },
+  methods: {
+    handleSubmit() {
+      alert(`提交的姓名：${this.name}，邮箱：${this.email}`);
+      // 在这里可以添加更多的表单提交逻辑
+    }
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List</title>
+<style>
+.completed {
+  text-decoration: line-through;
+  color: #90A4AE;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <h2>Todo List</h2>
+  <input type="text" v-model="newTodo" @keyup.enter="addTodo">
+  <button @click="addTodo">添加</button>
+
+  <ul>
+    <li v-for="(todo, index) in todos" :key="todo.id" :class="{ completed: todo.completed }">
+      <input type="checkbox" v-model="todo.completed">
+      {{ todo.text }}
+      <button @click="removeTodo(index)">删除</button>
+    </li>
+  </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    newTodo: '',
+    todos: []
+  },
+  methods: {
+    addTodo() {
+      if (this.newTodo.trim()) {
+        this.todos.push({
+          id: Date.now(),
+          text: this.newTodo,
+          completed: false
+        });
+        this.newTodo = '';
+      }
+    },
+    removeTodo(index) {
+      this.todos.splice(index, 1);
+    }
+  }
+});
+</script>
+
+</body>
+</html>

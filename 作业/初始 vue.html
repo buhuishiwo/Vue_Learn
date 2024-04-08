@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Directives Example</title>
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1 v-text="message1"></h1>
+    <h1>{{ message2 }}</h1>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message1: 'wenzhou',
+        message2: 'ligong'
+      }
+    });
+  </script>
+</body>
+</html>

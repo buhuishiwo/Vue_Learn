@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>待办事项列表</title>
+<!-- 引入Vue.js -->
+<script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>待办事项列表</h1>
+  <ul>
+    <li v-for="(item, index) in items" :key="index">
+      <input type="checkbox" v-model="item.done"> {{ item.text }}
+    </li>
+  </ul>
+  <p>未完成事项数量: {{ unfinishedCount }}</p>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    items: [
+      { text: '写作业', done: false },
+      { text: '健身', done: true },
+      { text: '写文章', done: false }
+    ]
+  },
+  computed: {
+    unfinishedCount() {
+      return this.items.filter(item => !item.done).length;
+    }
+  }
+});
+</script>
+
+</body>
+</html>

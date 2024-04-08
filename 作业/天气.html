@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>天气查询</title>
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+        .header {
+            width: 100%;
+            height: 60px;
+            background-color: #f0f1f3;
+            box-shadow: 3px 3px 5px #d5d5d5;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            /* justify-content: center; */
+            align-items: center;
+        }
+
+        .header .textbox {
+            width: 300px;
+            height: 30px;
+            border: none;
+            font-size: larger;
+            font-style: italic;
+            margin-left: 10px;
+            margin-bottom: -8px;
+            /* border-bottom: 1px solid black; */
+            background-color: transparent;
+            /* border-radius: 9px; */
+        }
+
+        .textbox:focus {
+            outline: none;
+        }
+
+        .textbox::placeholder {
+            font-style: italic;
+            color: black;
+        }
+
+        .button {
+            margin-left: 20px;
+            width: 90px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            transition: .5s;
+            font-size: larger;
+        }
+
+        .button:hover {
+            background-color: rgb(22, 20, 23);
+            color: white;
+            border-radius: 5px;
+        }
+
+        .main {
+            width: 100%;
+            height: 800px;
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tem {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f1f3;
+            margin-right: 90px;
+            margin-left: auto;
+            border-radius: 20px;
+            display: flex;
+            transition: .5s;
+            /* justify-content: center; */
+        }
+        .tem:hover{
+            color: #ffffff;
+            background-color: rgb(107, 147, 221);
+            box-shadow: 5px 5px 9px #afafe4;
+        }
+        .rain {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f1f3;
+            border-radius: 20px;
+            margin-left: 50px;
+            margin-right: 60px;
+            display: flex;
+            position: relative;
+            transition: .5s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .rain:hover{
+            color: #ffffff;
+            background-color: rgb(107, 147, 221);
+            box-shadow: 5px 5px 9px #afafe4;
+        }
+        .wind {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f1f3;
+            border-radius: 20px;
+            margin-left: 50px;
+            margin-right: 60px;
+            display: flex;
+            transition: .5s;
+        }
+        .wind:hover{
+            color: #ffffff;
+            background-color: rgb(107, 147, 221);
+            box-shadow: 5px 5px 9px #afafe4;
+        }
+        .humidity {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f1f3;
+            border-radius: 20px;
+            margin-left: 50px;
+            display: flex;
+            transition: .5s;
+        }
+        .humidity:hover{
+            color: #ffffff;
+            background-color: rgb(107, 147, 221);
+            box-shadow: 5px 5px 9px #afafe4;
+        }
+        .tem h1 {
+            font-size: 29px;
+            letter-spacing: 9px;
+            color: #787b86;
+            margin-left: 10px;
+        }
+        .tem .in_tem {
+            font-size: 50px;
+            margin-top: 66px;
+            margin-left: -40px;
+        }
+
+        .tem .in_feel {
+            position: absolute;
+            width: 200px;
+            height: 20px;
+            color: #787b86;
+            font-size: 15px;
+            text-align: center;
+            margin-top: 159px;
+        }
+
+        .rain h1 {
+            font-size: 29px;
+            letter-spacing: 9px;
+            color: #787b86;
+            margin-left: 13px;
+        }
+
+        .in_qixiang {
+            width: 200px;
+            height: 140px;
+            font-size: 50px;
+            margin-top: 66px;
+            position: absolute;
+            animation: scrollText 3s linear infinite;
+
+        }
+
+        .in_tips {
+            color: #787b86;
+            font-size: 15px;
+            margin-top: 160px;
+            margin-left: -30px;
+        }
+
+        /* 滚动动画 */
+        @keyframes scrollText {
+            from {
+                left: 100%;
+                /* 从右侧开始 */
+            }
+
+            to {
+                left: -100%;
+                /* 滚动到左侧并隐藏 */
+            }
+        }
+
+        .wind h1 {
+            font-size: 29px;
+            letter-spacing: 9px;
+            color: #787b86;
+            margin-left: 13px;
+        }
+
+        .wind span {
+            font-size: 50px;
+            margin-top: 66px;
+            margin-left: -40px;
+        }
+
+        .humidity h1 {
+            font-size: 29px;
+            letter-spacing: 9px;
+            color: #787b86;
+            margin-left: 13px;
+        }
+
+        .humidity span {
+            font-size: 50px;
+            margin-top: 66px;
+            margin-left: -40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <input type="text" class="textbox" placeholder="输入查询地区">
+            <input type="button" value="获取天气" @click="fetchadcode" class="button">
+        </div>
+        <div class="main">
+            <div class="waike">
+                <div class="tem">
+                    <h1>温度</h1>
+                    <span class="in_tem">{{temperature}}°C</span>
+                    <div class="in_feel" v-if="Number(temperature)>='35'">要热化了</div>
+                    <div class="in_feel" v-else-if="Number(temperature)>='28' && Number(temperature)<'35'">好热好热，快回家</div>
+                    <div class="in_feel" v-else-if="Number(temperature)>='20' && Number(temperature)<'28'">温度适宜，适合出去耍</div>
+                    <div class="in_feel" v-else-if="Number(temperature)>='12' && Number(temperature)<'20'">有点凉爽哦，晚上别着凉</div>
+                    <div class="in_feel" v-else-if="Number(temperature)>='0' && Number(temperature)<'12'">冷死了冷死了🥶</div>
+                    <div class="in_feel" v-else-if="Number(temperature)<'0'&& Number(temperature)!=='N/A'">哎呦我去，你把我弄哪了</div>
+                </div>
+            </div>
+            <div class="waike">
+                <div class="rain">
+                    <h1>气象</h1>
+                    <span class="in_qixiang">{{isRain}}</span>
+                    <span class="in_tips" v-if="isRain.includes('雨')">记得带伞哦</span>
+                    <span class="in_tips" v-else-if="isRain.includes('阴')">阴天也要开心</span>
+                    <span class="in_tips" v-else-if="isRain.includes('晴')">出去玩吧！</span>
+                </div>
+            </div>
+
+            <div class="wind">
+                <h1>风力</h1>
+                <span>{{wind}}</span>
+            </div>
+            <div class="humidity">
+                <h1>湿度</h1>
+                <span>{{humidity}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- 官网提供的 axios 在线地址 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="../js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                temperature: "N/A",
+                isRain: "N/A",
+                wind: "N/A",
+                humidity: "N/A"
+            },
+            methods: {
+                async fetchadcode() {
+                    const address = document.querySelector('.textbox')
+                    if (address.value === "") {
+                        alert('不嫩为空')
+                        return 0
+                    }
+                    console.log();
+                    let keywords = ""
+                    let adcode = ""
+                    try {
+                        keywords = address.value
+                        const response = await axios.get(`https://restapi.amap.com/v3/config/district?keywords=${keywords}&key=cbe6780f40c6264f93e3540b2c28ea01`);
+                        adcode = response.data.districts[0].adcode
+                        const response2 = await axios.get(`https://restapi.amap.com/v3/weather/weatherInfo?city=${adcode}&key=cbe6780f40c6264f93e3540b2c28ea01`)
+                        this.temperature = response2.data.lives[0].temperature
+                        this.isRain = response2.data.lives[0].weather
+                        this.wind = response2.data.lives[0].windpower
+                        this.humidity = response2.data.lives[0].humidity + '%'
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="number==='1'">这是第一段落</p>
+        <p v-if="number==='2'">这是第二段落</p>
+        <p v-if="number==='3'">这是第三段落</p>
+        <input type="checkbox" name="" id="1" v-on:click="Select">显示第一段落
+        <input type="checkbox" name="" id="2" v-on:click="Select">显示第二段落
+        <input type="checkbox" name="" id="3" v-on:click="Select">显示第三段落
+
+    </div>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                number: '0'
+            },
+            methods:{
+                Select:function(e){
+                    this.number = e.target.id
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商品列表</title>
+<!-- 引入Vue.js -->
+<script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>商品列表</h1>
+  <ul>
+    <li v-for="product in products">
+      <strong>商品名称：</strong> {{ product.name }},
+      <strong>价格：</strong> {{ product.price }},
+      <strong>库存状态：</strong> 
+      <span v-if="product.stock <= 5" style="color: red">库存紧张</span>
+      <span v-else style="color: green">库存充足</span>
+    </li>
+  </ul>
+</div>
+
+<script>
+// 创建一个新的Vue实例
+new Vue({
+  el: '#app',
+  data: {
+    // 商品信息数组
+    products: [
+      { name: '商品A', price: 100, stock: 3 },
+      { name: '商品B', price: 200, stock: 8 },
+      { name: '商品C', price: 300, stock: 1 },
+      // 可根据需要添加更多商品对象
+    ]
+  }
+});
+</script>
+
+</body>
+</html>

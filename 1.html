@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Scrolling Text</title>
+<style>
+    .scroll-box {
+        width: 200px;
+        height: 100px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+    <div class="scroll-box" id="textContainer">
+        <span id="text">
+            This is a long text that will scroll inside the box when it exceeds the box size. This is a long text that will scroll inside the box when it exceeds the box size. This is a long text that will scroll inside the box when it exceeds the box size.
+        </span>
+    </div>
+
+    <script>
+        const text = document.getElementById('text');
+        const textContainer = document.getElementById('textContainer');
+
+        function scrollText() {
+            text.style.marginLeft = `${-textContainer.scrollLeft}px`;
+        }
+
+        setInterval(function() {
+            textContainer.scrollLeft += 1;
+            if (textContainer.scrollLeft >= text.scrollWidth - textContainer.clientWidth) {
+                textContainer.scrollLeft = 0;
+            }
+            scrollText();
+        }, 20);
+    </script>
+</body>
+</html>

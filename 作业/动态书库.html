@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图书列表</title>
+<script src="../js/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>图书列表</h1>
+  <ul>
+    <!-- 使用v-for指令遍历books数组并显示信息 -->
+    <li v-for="book in books">
+      <strong>书名：</strong> {{ book.title }},
+      <strong>作者：</strong> {{ book.author }},
+      <strong>出版年份：</strong> {{ book.year }}
+    </li>
+  </ul>
+</div>
+
+<script>
+// 实例化一个新的Vue实例
+new Vue({
+  el: '#app',
+  data: {
+    // 定义books数据
+    books: [
+      { title: '1984', author: '乔治·奥威尔', year: 1949 },
+      { title: '美丽新世界', author: '奥尔德斯·赫胥黎', year: 1932 },
+      { title: '杀死一只知更鸟', author: '哈珀·李', year: 1960 },
+      // 根据需要添加更多书籍对象
+    ]
+  }
+});
+</script>
+
+</body>
+</html>

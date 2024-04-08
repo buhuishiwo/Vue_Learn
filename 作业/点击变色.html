@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .btn{
+            width: 60px;
+            height: 70px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="点我" class="btn" v-on:click="Change" v-bind:style="style">
+        <p v-show="iShow">点击了</p>
+    </div>
+    
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                iShow:false,
+                style:{
+                    backgroundColor:" "
+                }
+            },
+            methods:{
+                Change:function(){
+                    this.iShow =!this.iShow
+                    this.style="backgroundColor:red"
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
