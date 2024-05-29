@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <h1>{{title}}</h1>
+    </div>
+    <script>
+
+        const char = Vue.extend({
+            template: `
+            <div>
+                <h2>角色名称：{{name}}</h2>
+                <h2>{{address}}</h2>
+            </div>
+            `,
+            // data() {
+            //     return {
+            //         name: '谷風　天音',
+            //         address: '東京都'
+            //     }
+            // }
+            props:{
+                name
+                ,address
+                
+            }
+        })
+        const game = Vue.extend({
+            template: `
+            <div>
+                <h2>游戏名称：{{gameName}}</h2>
+                <h2>开发公司：{{compane}}</h2>
+                <char></char>
+                <button @click="showName">点我</button>
+            </div>
+            `,
+            data() {
+                return {
+                    name:'温州理工',
+                    address:'温州龙湾',
+                    gameName: '天使⭐️騒々 RE-BOOT！',
+                    compane: 'yuzusoft'
+                }
+            },
+            methods: {
+                showName() {
+                    alert("死宅真恶心")
+                }
+            },
+            components:{
+                char:char
+            }
+        })
+        const gamer = Vue.extend({
+            template:
+            `
+            <div>
+                <h2>玩家名称：{{name}}</h2>
+            </div>
+            `,
+            data(){
+                return {
+                    name:'张三'
+                }
+            }
+        })
+        const app = Vue.extend({
+            template:
+            `
+            <div>
+                <gamer></gamer>
+                <game></game>
+            </div>
+            `,
+            components:{
+                gamer,
+                game
+            }
+        })
+
+        new Vue({
+            template:`<app></app>`,
+            el: "#root",
+            data: {
+                title: '柚子社'
+            },
+            components: {
+                app
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

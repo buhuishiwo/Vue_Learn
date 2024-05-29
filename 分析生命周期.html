@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root" :x="n">
+        <h2>n:{{n}}</h2>
+        <button @click="add">点击加一</button>
+    </div>
+</body>
+
+<script src="./js/vue.js">
+    new Vue({
+    el:'#root',
+    data:{
+        n:1
+    },
+    methods:{
+        add(){
+            this.n++
+        }
+    }
+    })
+</script>
+</html>

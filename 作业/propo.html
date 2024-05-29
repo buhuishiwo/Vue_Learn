@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+</head>
+
+<body>
+    <div id="app">
+        <App></App>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+
+        const school = Vue.extend({
+            template: `
+            <div>
+                <h2>学校名称：{{name}}</h2>
+                <h2>学校地址：{{address}}</h2>
+            </div>
+            `,
+            props:['name','address']
+        })
+
+        const App = Vue.extend({
+            template:
+            `
+            <div>
+                <school name="温州理工" address="温州龙湾"/>    
+            </div>
+            `,
+            data(){
+                return {
+                    name:"温州理工",
+                    address:"温州龙湾"
+                }
+            },
+            components:{
+                school
+            }
+        })
+        new Vue({
+            el: "#app",
+            data: {
+
+            },
+            components:{
+                App
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

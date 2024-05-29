@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vueApp</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <school></school>
+    </div>
+    
+    <script>
+        Vue.prototype.msg="你好"
+        const school = Vue.extend({
+            template:`
+            <div>
+                <h2>角色名称：{{name}}</h2>
+                <h2>角色住址：{{address}}</h2>  
+                <button @click="showX">点我显示 msg</button> 
+            </div>
+            `,
+            data(){
+                return{
+                    name:'张三',
+                    address:'北京'
+                }
+            },
+            methods:{
+                showX(){
+                    console.log(this.msg);
+                }
+            }
+        })
+
+       const vm = new Vue({
+            el: "#app",
+            data: {
+                msg1:'你好'
+            },
+            components:{
+                school
+            },
+            methods: {
+
+            }
+        })
+
+        console.log(school.prototype.__proto__===Vue.prototype);
+    </script>
+</body>
+
+</html>

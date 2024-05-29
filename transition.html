@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js 2 Transition 示例</title>
+  <style>
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <button @click="toggleItem">Toggle Item</button>
+  <transition name="fade" :appear="true">
+    <ul v-if="showList">
+      <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+    </ul>
+  </transition>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    showList: false,
+    items: ['Item 1', 'Item 2', 'Item 3']
+  },
+  methods: {
+    toggleItem() {
+      this.showList = !this.showList;
+    }
+  }
+});
+</script>
+
+</body>
+</html>
