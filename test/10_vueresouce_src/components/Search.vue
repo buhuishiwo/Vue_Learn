@@ -10,7 +10,7 @@
 
 <script>
 	let errMsg=''
-	import axios from 'axios'
+	// import axios from 'axios'
 	export default {
 		name:'MainSearch',
 		data(){
@@ -22,7 +22,8 @@
 			searchUsers(){
 				//请求前
 				this.$bus.$emit('getUsers',{isFirst:false,isLoading:true,errMsg:'',users:[]})
-				axios.get(`https://api.github.com/search/users?q=${this.keyword}`).then(
+				// 使用vue-resource请求
+				this.$http.get(`https://api.github.com/search/users?q=${this.keyword}`).then(
 					response => {
 						console.log('请求成功')
 						//请求成功
