@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "./router"
+import './api/mock'
 import store from './store'
 import {
   Container,
@@ -16,7 +17,13 @@ import {
   Button,
   Dropdown,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Row,
+  Card,
+  Col,
+  Table,
+  TableColumn,
+  Empty
 } from 'element-ui'
 Vue.component('el-container',Container)
 Vue.component('el-aside',Aside)
@@ -32,6 +39,12 @@ Vue.component('el-button',Button)
 Vue.component('el-dropdown',Dropdown)
 Vue.component('el-dropdown-item',DropdownItem)
 Vue.component('el-dropdown-menu',DropdownMenu)
+Vue.component('el-row',Row)
+Vue.component('el-col',Col)
+Vue.component('el-card',Card)
+Vue.component('el-table',Table)
+Vue.component('el-table-column',TableColumn)
+Vue.component('el-empty',Empty)
 Vue.config.productionTip = false
 
 new Vue({

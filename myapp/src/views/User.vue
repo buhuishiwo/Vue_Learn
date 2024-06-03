@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>User</h1>
+        <el-empty description="开发中..."></el-empty>
     </div>
 </template>
 

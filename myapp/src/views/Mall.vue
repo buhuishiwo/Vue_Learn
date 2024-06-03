@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Mall</h1>
+        <el-empty description="暂停开放"></el-empty>
     </div>
 </template>
 

@@ -1,11 +1,13 @@
 <template>
     <div class="header-content">
+        <!-- 左侧面包屑区 -->
         <div class="l-content">
             <!-- 打开/收起按钮 -->
             <el-button icon="el-icon-menu" @click="changeMenu()" size="small"></el-button>
             <!-- 面包屑区 -->
             <span class="text">首页</span>
         </div>
+        <!-- 右侧头像区 -->
         <div class="r-content">
             <el-dropdown>
                 <span class="el-dropdown-link">
@@ -24,6 +26,7 @@
 
 export default {
     methods:{
+        //点击折叠菜单栏方法
         changeMenu(){
             this.$store.commit('collapseMenu')
         }

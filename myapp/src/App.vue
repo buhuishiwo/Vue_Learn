@@ -8,8 +8,6 @@
 
 <script>
 
-
-
 export default {
   name: 'App',
   components: {
@@ -19,7 +17,11 @@ export default {
 </script>
 
 <style>
-*{
+* {
+  margin: 0px;
+  padding: 0px;
+}
+p {
   margin: 0px;
   padding: 0px;
 }
