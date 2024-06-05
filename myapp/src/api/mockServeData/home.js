@@ -21,6 +21,18 @@ export default {
         return {
             code: 20000,
             data: {
+                userinfo:
+                    [
+                        {
+                            name: 'Admin',
+                            tag: '超级管理员',
+                        },
+                        {
+                            name:'User',
+                            tag:'普通用户'
+                        }
+
+                    ],
                 // 饼图
                 videoData: [
                     {

@@ -5,13 +5,13 @@
                 <div class="user">
                     <img src="../assets/anya30.png" alt="" srcset="">
                     <div class="userinfo">
-                        <p class="name">Admin</p>
-                        <p class="access">超级管理员</p>
+                        <p class="name">{{ this.userinfo.name }}</p>
+                        <p class="access">{{ this.userinfo.tag }}</p>
                     </div>
                 </div>
                 <div class="login-info">
-                    <p>上次登录时间：<span>2021-01-01</span></p>
-                    <p>上次登录地点：<span>温州</span></p>
+                    <p>上次登录时间：<span>{{ this.currentTime }}</span></p>
+                    <p>上次登录地点：<span>{{this.location}}</span></p>
                 </div>
             </el-card>
 
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Cookie from 'js-cookie'
 import { getData } from '../api/index'
 import * as echarts from 'echarts'
 export default {
@@ -65,7 +67,7 @@ export default {
             countData: [
                 {
                     name: "今日支付订单",
-                    value: 1234,
+                    value: 5234,
                     icon: "success",
                     color: "#2ec7c9",
                     displayValue: 0
@@ -73,7 +75,7 @@ export default {
                 },
                 {
                     name: "今日收藏订单",
-                    value: 210,
+                    value: 2140,
                     icon: "star-on",
                     color: "#ffb980",
                     displayValue: 0
@@ -81,7 +83,7 @@ export default {
                 },
                 {
                     name: "今日未支付订单",
-                    value: 1234,
+                    value: 234,
                     icon: "s-goods",
                     color: "#5ab1ef",
                     displayValue: 0
@@ -112,15 +114,25 @@ export default {
                 },
             ],
             incrementValue: 999, // 每次增加的值
-            interval: 20 // 每次增加的时间间隔，单位毫秒
+            interval: 20, // 每次增加的时间间隔，单位毫秒
+            location: null,
+            userinfo:{},
+            currentTime:''
         }
     },
 
     mounted() {
+        this.locatetime()
+        this.fetchLocation()
         getData().then(({ data }) => {
+            if(Cookie.get('token')==='admin') {
+                this.userinfo = data.data.userinfo[0]
+            } else if(Cookie.get('token')==='user') {
+                this.userinfo = data.data.userinfo[1]
+                console.log(this.userinfo);
+            }
             const { tableData, orderData, userData, videoData } = data.data
             this.tableData = tableData
-            console.log(userData);
             //初始化 echarts 实例
             const echarts1 = echarts.init(this.$refs.echarts1)
             let echarts1Option = {}
@@ -232,6 +244,19 @@ export default {
     this.startCounting()
 },
 methods: {
+    locatetime(){
+        const now = new Date()
+        this.currentTime = now.toLocaleDateString()
+    },
+    fetchLocation() {
+      axios.get(`https://ipinfo.io?token=d8b44dc0ce693c`)  // 替换为你的 API 密钥
+        .then(response => {
+          this.location = `${response.data.city}, ${response.data.region}, ${response.data.country}`;
+        })
+        .catch(error => {
+          console.error('Error fetching location:', error);
+        });
+    },
     //页面加载完，主要数据增加效果
     startCounting() {
         this.countData.forEach((item, index) => {
@@ -330,7 +355,7 @@ methods: {
         .txt {
             font-size: 14px;
             color: #999999;
-            text-align: center;
+            margin-left: 5px;
         }
     }
 
